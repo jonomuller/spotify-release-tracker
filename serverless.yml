@@ -1,0 +1,21 @@
+service: spotify-release-tracker
+
+provider:
+  name: aws
+  region: eu-west-1
+  runtime: nodejs12.x
+  stage: ${opt:stage}
+
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
+custom:
+  webpack:
+    packager: 'yarn'
+    webpackConfig: webpack.config.js
+    includeModules:
+      forceExclude:
+        - aws-sdk
