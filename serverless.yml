@@ -5,17 +5,36 @@ provider:
   region: eu-west-1
   runtime: nodejs12.x
   stage: ${opt:stage}
+  environment:
+    SPOTIFY_CLIENT_ID: ${self:custom.config.spotify.clientId}
+    SPOTIFY_CLIENT_SECRET: ${self:custom.config.spotify.clientSecret}
+    SPOTIFY_REDIRECT_URI: ${self:custom.config.spotify.redirectUri}
+    SPOTIFY_SCOPES: ${self:custom.config.spotify.scopes}
+    SPOTIFY_STATE: ${self:custom.config.spotify.state}
 
 plugins:
   - serverless-webpack
+  - serverless-offline
 
 package:
   individually: true
 
 custom:
+  config: ${file(env/${self:provider.stage}.json)}
   webpack:
-    packager: 'yarn'
+    packager: yarn
     webpackConfig: webpack.config.js
     includeModules:
       forceExclude:
         - aws-sdk
+
+functions:
+  login:
+    handler: src/endpoints/login/lambda.handler
+    events:
+      - http:
+          method: get
+          path: api/auth/login
+          cors:
+            origins:
+              - '*'

@@ -1,0 +1,9 @@
+{
+  "spotify": {
+    "clientId": "clientId",
+    "clientSecret": "clientSecret",
+    "redirectUri": "redirectUri",
+    "scopes": "scopes",
+    "state": "state"
+  }
+}

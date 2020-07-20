@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "out",
-    "declaration": true
+    "declaration": true,
+    "esModuleInterop": true
   },
   "include": ["./src"],
   "exclude": ["**/__tests__/**", "**/*.test.ts"]

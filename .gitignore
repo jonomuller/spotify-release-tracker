@@ -1,2 +1,6 @@
 node_modules/
 out/
+.serverless/
+.webpack/
+env/*
+!env/config.json
