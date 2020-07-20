@@ -11,10 +11,12 @@ provider:
     SPOTIFY_REDIRECT_URI: ${self:custom.config.spotify.redirectUri}
     SPOTIFY_SCOPES: ${self:custom.config.spotify.scopes}
     SPOTIFY_STATE: ${self:custom.config.spotify.state}
+    USERS_TABLE_NAME: ${ssm:/${self:service}/${self:provider.stage}/dynamo/users/name}
 
 plugins:
   - serverless-webpack
   - serverless-offline
+  - serverless-iam-roles-per-function
 
 package:
   individually: true
@@ -37,6 +39,10 @@ functions:
           path: api/auth/login
   authCallback:
     handler: src/endpoints/authCallback/lambda.handler
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:PutItem
+        Resource: ${ssm:/${self:service}/${self:provider.stage}/dynamo/users/arn}
     events:
       - http:
           method: get

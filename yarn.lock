@@ -6344,6 +6344,13 @@ serialize-javascript@^4.0.0:
   dependencies:
     randombytes "^2.1.0"
 
+serverless-iam-roles-per-function@^2.0.2:
+  version "2.0.2"
+  resolved "https://npm.infra.senecalearning.com/serverless-iam-roles-per-function/-/serverless-iam-roles-per-function-2.0.2.tgz#c64eb2f34552e59d5fb8cb2169ebbd27734a6774"
+  integrity sha512-3zv4Af3x7KJHC4fuJMHniEEstCljMghReaYIg94Spdsqkhiy8GJ3yfJ5Jy+wiG/DvyObK91JJNMjLhDnDc+vCQ==
+  dependencies:
+    lodash "^4.17.15"
+
 serverless-offline@^6.5.0:
   version "6.5.0"
   resolved "https://npm.infra.senecalearning.com/serverless-offline/-/serverless-offline-6.5.0.tgz#13d87eac1fae6fe6543ce0545d91062267262e20"

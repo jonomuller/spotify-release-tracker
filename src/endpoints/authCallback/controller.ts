@@ -1,5 +1,7 @@
+import { DynamoDB } from 'aws-sdk';
 import Spotify from 'spotify-web-api-node';
 
+import { User } from '../../models/User';
 import { Request } from './types';
 
 export default async function controller(request: Request) {
@@ -25,7 +27,26 @@ export default async function controller(request: Request) {
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET
   });
 
-  const creds = await spotify.authorizationCodeGrant(code);
+  const { body: creds } = await spotify.authorizationCodeGrant(code);
+
+  spotify.setAccessToken(creds.access_token);
+
+  const {
+    body: { id: userId }
+  } = await spotify.getMe();
+
+  const user: User = {
+    userId,
+    refreshToken: creds.refresh_token
+  };
+
+  const dynamo = new DynamoDB.DocumentClient();
+  await dynamo
+    .put({
+      TableName: process.env.USERS_TABLE_NAME,
+      Item: user
+    })
+    .promise();
 
   return {
     statusCode: 200,
