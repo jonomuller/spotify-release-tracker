@@ -3,3 +3,5 @@ node_modules/
 .webpack/
 env/*
 !env/config.json
+.terraform/
+terraform.tfstate*

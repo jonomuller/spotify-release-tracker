@@ -4,3 +4,5 @@ out/
 .webpack/
 env/*
 !env/config.json
+.terraform/
+terraform.tfstate*
