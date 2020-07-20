@@ -35,6 +35,9 @@ functions:
       - http:
           method: get
           path: api/auth/login
-          cors:
-            origins:
-              - '*'
+  authCallback:
+    handler: src/endpoints/authCallback/lambda.handler
+    events:
+      - http:
+          method: get
+          path: api/auth/callback
