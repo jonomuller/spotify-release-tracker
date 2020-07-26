@@ -1,8 +1,9 @@
 import { APIGatewayEvent } from 'aws-lambda';
 
-import controller from './controller';
+import makeController from './controller';
 
 export async function handler(event: APIGatewayEvent) {
+  const controller = makeController();
   const request = {
     queryParams: event.queryStringParameters
   };
